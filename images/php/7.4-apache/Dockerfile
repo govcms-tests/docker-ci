@@ -32,9 +32,16 @@ RUN { \
     echo 'opcache.fast_shutdown=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
-ENV APACHE_DOCUMENT_ROOT=/app/web
+# install dockerize
+RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/dockerize-latest.tar.gz" \
+  && curl --silent --show-error --location --fail --retry 3 --output /tmp/dockerize-linux-amd64.tar.gz $DOCKERIZE_URL \
+  && tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64.tar.gz \
+  && rm -rf /tmp/dockerize-linux-amd64.tar.gz \
+  && dockerize --version
 
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+ENV APACHE_DOCUMENT_ROOT /app/web
+
+RUN sed -ri -e 's!/var/www/html!$APACHE_DOCUMENT_ROOT!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!$APACHE_DOCUMENT_ROOT!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 CMD ["/bin/sh"]
