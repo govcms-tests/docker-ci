@@ -1,7 +1,7 @@
 FROM php:7.4-cli-alpine
 FROM composer:2 as composer
 
-RUN apk add --no-cache git freetype-dev libjpeg-turbo-dev libpng-dev \
+RUN apk add --no-cache git rsync freetype-dev libjpeg-turbo-dev libpng-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \
     && docker-php-ext-install -j "$(nproc)" gd
 
