@@ -6,11 +6,38 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90govcmsci \
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# install service dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git locales mariadb-client nodejs libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
+    && apt-get install -y --no-install-recommends git locales mariadb-client
+
+# install PHP dependencies
+RUN apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \
-    && docker-php-ext-install -j "$(nproc)" gd opcache pdo_mysql zip \
-    && apt-get autoclean && apt-get autoremove \
+    && docker-php-ext-install -j "$(nproc)" gd opcache pdo_mysql zip
+
+# install Yarn dependencies
+RUN apt-get install -y apt-transport-https
+RUN curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt-get install -y nodejs
+RUN npm install -g npm@latest
+RUN npm install -g yarn@latest
+
+# good colors for most applications
+ENV TERM xterm
+# avoid million NPM install messages
+ENV npm_config_loglevel warn
+# allow installing when the main user is root
+ENV npm_config_unsafe_perm true
+
+# install Cypress dependencies (separate commands to avoid time outs)
+RUN apt-get install -y libgtk2.0-0
+RUN apt-get install -y libnotify-dev
+RUN apt-get install -y libgconf-2-4 libnss3 libxss1
+RUN apt-get install -y libasound2 xvfb
+
+# clean up the install files
+RUN apt-get autoclean && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 
 # Set timezone to Australia/Sydney by default
@@ -37,12 +64,9 @@ RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cac
   && rm -rf /tmp/dockerize-linux-amd64.tar.gz \
   && dockerize --version
 
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
-
+# install and config Apache
 RUN a2enmod rewrite
-
 ENV APACHE_DOCUMENT_ROOT /app/web
-
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT:-/app/web}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT:-/app/web}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
