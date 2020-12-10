@@ -6,8 +6,6 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90govcmsci \
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN a2enmod rewrite
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends locales mariadb-client libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \
@@ -38,6 +36,10 @@ RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cac
   && tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64.tar.gz \
   && rm -rf /tmp/dockerize-linux-amd64.tar.gz \
   && dockerize --version
+
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
+RUN a2enmod rewrite
 
 ENV APACHE_DOCUMENT_ROOT /app/web
 
