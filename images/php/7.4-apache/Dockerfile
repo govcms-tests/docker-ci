@@ -7,7 +7,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90govcmsci \
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends locales mariadb-client libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
+    && apt-get install -y --no-install-recommends locales mariadb-client nodejs libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \
     && docker-php-ext-install -j "$(nproc)" gd opcache pdo_mysql zip \
     && apt-get autoclean && apt-get autoremove \
