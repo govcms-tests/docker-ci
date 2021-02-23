@@ -31,10 +31,10 @@ ENV npm_config_loglevel warn
 ENV npm_config_unsafe_perm true
 
 # install Cypress dependencies (separate commands to avoid time outs)
-RUN apt-get install -y libgtk2.0-0
+RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev
 RUN apt-get install -y libnotify-dev
 RUN apt-get install -y libgconf-2-4 libnss3 libxss1
-RUN apt-get install -y libasound2 xvfb
+RUN apt-get install -y libasound2 libxtst6 xauth xvfb
 
 # clean up the install files
 RUN apt-get autoclean && apt-get autoremove \
