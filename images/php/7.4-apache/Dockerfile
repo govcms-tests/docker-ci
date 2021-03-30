@@ -1,3 +1,4 @@
+FROM composer:2 as composer
 FROM php:7.4-apache
 
 # make Apt non-interactive
@@ -63,6 +64,9 @@ RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cac
   && tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64.tar.gz \
   && rm -rf /tmp/dockerize-linux-amd64.tar.gz \
   && dockerize --version
+
+COPY --from=composer /usr/bin/composer /usr/local/bin/
+ENV COMPOSER_MEMORY_LIMIT=-1
 
 # install and config Apache
 RUN a2enmod rewrite
