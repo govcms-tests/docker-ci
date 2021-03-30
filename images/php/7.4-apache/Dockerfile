@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # install service dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends openssh-client git locales mariadb-client
+    && apt-get install -y --no-install-recommends openssh-client git rsync locales mariadb-client
 
 # install PHP dependencies
 RUN apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
