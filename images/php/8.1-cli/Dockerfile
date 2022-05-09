@@ -1,5 +1,5 @@
 FROM php:8.1-cli-alpine
-FROM composer:2 as composer
+FROM composer
 
 RUN apk add --no-cache git rsync freetype-dev libjpeg-turbo-dev libpng-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \

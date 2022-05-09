@@ -1,4 +1,4 @@
-FROM composer:2 as composer
+FROM composer
 FROM php:8.1-apache
 
 # make Apt non-interactive
