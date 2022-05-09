@@ -18,7 +18,7 @@ RUN apt-get install -y --no-install-recommends libfreetype6-dev libjpeg-dev libp
 
 # install Yarn dependencies
 RUN apt-get install -y apt-transport-https
-RUN curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN apt-get install -y nodejs
 RUN npm install -g npm@latest
