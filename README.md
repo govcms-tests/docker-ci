@@ -30,6 +30,6 @@ docker push govcmstesting/php:7.4-apache
 Release php-cli image
 
 ```
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --tag govcmstesting/php:8.1-cli --push .
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 --tag govcmstesting/php:8.1-cli --push .
 docker push govcmstesting/php:7.4-cli
 ```
