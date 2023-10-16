@@ -69,10 +69,3 @@ RUN DOCKERIZE_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cac
 # Copy Composer binary and set memory limit
 COPY --from=composer /usr/bin/composer /usr/local/bin/
 ENV COMPOSER_MEMORY_LIMIT=-1
-
-# Set the working directory
-WORKDIR /app/
-RUN set -eux; \
-	rm -rf /var/www/html; \
-    mkdir -p /app/web; \
-	ln -sf /app/web /var/www/html
