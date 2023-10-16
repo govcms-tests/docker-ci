@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openssh-client git rsync unzip locales mariadb-client libicu-dev sqlite3
+    openssh-client git rsync unzip locales mariadb-client libicu-dev sqlite3 sudo
 
 # Install PHP extensions
 RUN apt-get install -y --no-install-recommends \
