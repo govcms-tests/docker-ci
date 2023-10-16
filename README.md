@@ -1,35 +1,55 @@
-# docker-ci
+# GovCMS Testing Docker Images
 
-## Build and release images
+This repository contains Docker images designed for testing and development with GovCMS. These images are tailored for specific PHP versions and use cases. You can use them to create an environment suitable for testing your GovCMS projects.
 
-### Build images
+## Images Included
 
-Build php-apache image
+### PHP-Apache Images
 
-```
+- `govcmstesting/php:8.1-apache`: PHP 8.1 with Apache web server.
+- `govcmstesting/php:7.4-apache`: PHP 7.4 with Apache web server.
+
+### PHP-CLI Images
+
+- `govcmstesting/php:8.1-cli`: PHP 8.1 for command-line operations.
+- `govcmstesting/php:7.4-cli`: PHP 7.4 for command-line operations.
+
+## Usage
+
+### Building Images
+
+You can build these images using the provided Dockerfiles. For example, to build the PHP-Apache image for PHP 8.1, use the following command:
+
+```bash
 docker build --tag govcmstesting/php:8.1-apache .
-docker build --tag govcmstesting/php:7.4-apache .
 ```
 
-Build php-cli image
+### Releasing Images
 
-```
-docker build --tag govcmstesting/php:8.1-cli .
-docker build --tag govcmstesting/php:7.4-cli .
-```
+To release these images, you can use Docker Buildx, which allows you to build and push images for multiple platforms. For instance, to release the PHP-Apache image for PHP 8.1 for various platforms, use the following command:
 
-### Release images
-
-Release php-apache image
-
-```
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --tag govcmstesting/php:8.1-apache --push .
-docker push govcmstesting/php:7.4-apache
+```bash
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 --tag govcmstesting/php:8.1-apache --push .
 ```
 
-Release php-cli image
-
-```
+```bash
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 --tag govcmstesting/php:8.1-cli --push .
-docker push govcmstesting/php:7.4-cli
 ```
+
+Make sure to configure Docker Buildx appropriately to work with multiple platforms.
+
+### Pulling Images
+
+You can pull these images from a container registry using docker pull. For instance, to pull the PHP 7.4 Apache image, use the following command:
+
+```bash
+docker pull govcmstesting/php:8.1-apache
+```
+
+```bash
+docker pull govcmstesting/php:8.1-cli
+```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
