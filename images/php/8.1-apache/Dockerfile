@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \
     libfreetype6-dev libjpeg-dev libpng-dev libpq-dev libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg=/usr \
-    && docker-php-ext-install -j "$(nproc)" gd opcache pdo_mysql zip
+    && docker-php-ext-install -j "$(nproc)" gd opcache pdo_mysql zip intl
 
 # Install Node.js and Yarn
 RUN apt-get install -y apt-transport-https && \
