@@ -38,6 +38,10 @@ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 --tag govcmstesting/php:8.2-cli --push .
 ```
 
+```bash
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 --tag govcmstesting/ci:8.2-apache --push .
+```
+
 Make sure to configure Docker Buildx appropriately to work with multiple platforms.
 
 ### Pulling Images
