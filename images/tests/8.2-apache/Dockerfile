@@ -14,5 +14,6 @@ RUN a2ensite default
 COPY --from=builder /tests /tests
 
 # Set environment variables
+ENV PATH=${PATH}:/app/tests/vendor/bin:/app/vendor/bin:/app/bin
 ENV SIMPLETEST_BASE_URL='http://local.govcms.gov.au'
 ENV SIMPLETEST_DB='sqlite://localhost/sites/default/files/.ht.sqlite'
