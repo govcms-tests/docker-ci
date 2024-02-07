@@ -6,6 +6,7 @@ FROM govcmstesting/php:8.2-apache
 
 # Copy Apache configuration file
 COPY images/apache/httpd.conf /etc/apache2/sites-available/default.conf
+COPY images/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Enable the default site configuration
 RUN a2ensite default
