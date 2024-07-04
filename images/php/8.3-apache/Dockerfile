@@ -35,9 +35,9 @@ RUN apt-get install -y apt-transport-https && \
     npm install -g yarn@latest
 
 # Set environment variables
-ENV TERM xterm
-ENV npm_config_loglevel warn
-ENV npm_config_unsafe_perm true
+ENV TERM=xterm
+ENV npm_config_loglevel=warn
+ENV npm_config_unsafe_perm=true
 
 # Install Cypress dependencies
 RUN apt-get install -y \
