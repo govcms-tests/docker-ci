@@ -6,12 +6,16 @@ This repository contains Docker images designed for testing and development with
 
 ### PHP-Apache Images
 
+- `govcmstesting/php:8.4-apache`: PHP 8.4 with Apache web server.
+- `govcmstesting/php:8.3-apache`: PHP 8.3 with Apache web server.
 - `govcmstesting/php:8.2-apache`: PHP 8.2 with Apache web server.
 - `govcmstesting/php:8.1-apache`: PHP 8.1 with Apache web server.
 - `govcmstesting/php:7.4-apache`: PHP 7.4 with Apache web server.
 
 ### PHP-CLI Images
 
+- `govcmstesting/php:8.4-cli`: PHP 8.4 for command-line operations.
+- `govcmstesting/php:8.3-cli`: PHP 8.3 for command-line operations.
 - `govcmstesting/php:8.2-cli`: PHP 8.2 for command-line operations.
 - `govcmstesting/php:8.1-cli`: PHP 8.1 for command-line operations.
 - `govcmstesting/php:7.4-cli`: PHP 7.4 for command-line operations.
