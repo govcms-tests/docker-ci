@@ -20,6 +20,11 @@ This repository contains Docker images designed for testing and development with
 - `govcmstesting/php:8.1-cli`: PHP 8.1 for command-line operations.
 - `govcmstesting/php:7.4-cli`: PHP 7.4 for command-line operations.
 
+### CI Images
+
+- `govcmstesting/ci:8.4-apache`: GovCMS CI image using PHP 8.4 and Apache.
+- `govcmstesting/ci:8.3-apache`: GovCMS CI image using PHP 8.3 and Apache.
+
 ## Usage
 
 ### Building Images
